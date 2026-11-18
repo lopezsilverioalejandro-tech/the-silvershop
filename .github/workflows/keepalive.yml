@@ -1,0 +1,16 @@
+name: keep-alive
+
+# Render duerme los servicios gratuitos tras 15 minutos sin visitas y, al
+# despertar, pierde los archivos subidos. Un ping cada 10 minutos mantiene la
+# instancia despierta dentro de las horas gratuitas de Render.
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping The SilverShop
+        run: curl -fsS --max-time 30 https://the-silvershop.onrender.com/api/stats > /dev/null
