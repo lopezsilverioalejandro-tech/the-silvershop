@@ -33,8 +33,15 @@ router.get('/api/apps/:slug', (req, res) => {
   res.json(detail);
 });
 
-router.get('/api/stats', (_req, res) => {
-  const apps = store.read().apps.filter((a) => a.published !== false && a.versions.length);
+router.get('/api/health', (_req, res) => {
+  res.json({
+    ok: true,
+    commit: process.env.RENDER_GIT_COMMIT || null,
+    uptime: Math.round(process.uptime()),
+  });
+});
+
+router.get('/api/stats', (_req, res) => {  const apps = store.read().apps.filter((a) => a.published !== false && a.versions.length);
   res.json({
     apps: apps.length,
     downloads: apps.reduce((sum, a) => sum + lib.totalDownloads(a), 0),
