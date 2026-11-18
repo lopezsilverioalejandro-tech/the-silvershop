@@ -1,0 +1,29 @@
+# Despliegue de prueba gratuita en Render.
+# Limite importante: el plan free no tiene disco persistente. Los APK que subas
+# se pierden cuando el servicio se reinicia o se vuelve a desplegar.
+# Para una tienda real, cambia plan a "starter" y activa el disco del final.
+services:
+  - type: web
+    name: the-silvershop
+    runtime: node
+    plan: free
+    buildCommand: npm install --no-fund --no-audit
+    startCommand: node server.js
+    healthCheckPath: /api/stats
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PUBLIC_URL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: GOOGLE_SITE_VERIFICATION
+        sync: false
+    # Para pasar a una tienda real:
+    # 1. plan: starter
+    # 2. anade DATA_DIR=/var/data
+    # 3. descomenta el bloque disk
+    # disk:
+    #   name: silvershop-data
+    #   mountPath: /var/data
+    #   sizeGB: 1

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!--SEO-->
+  <meta name="theme-color" content="#08090b">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/" aria-label="The SilverShop, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 2.5 29.5 16 16 29.5 2.5 16z" stroke="url(#silver)" stroke-width="1.6"/>
+            <path d="M16 8.5 23.5 16 16 23.5 8.5 16z" fill="url(#silver)" opacity=".9"/>
+            <defs>
+              <linearGradient id="silver" x1="6" y1="3" x2="26" y2="29" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#ffffff"/><stop offset=".5" stop-color="#c9d0db"/><stop offset="1" stop-color="#7f8896"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="brand-text">The <em>Silver</em>Shop</span>
+      </a>
+
+      <label class="search" for="q">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.7"/>
+          <path d="m16 16 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+        <input id="q" type="search" placeholder="Buscar en la tienda" autocomplete="off" spellcheck="false">
+        <kbd aria-hidden="true">/</kbd>
+      </label>
+
+      <nav class="top-actions">
+        <a class="btn btn-ghost hide-sm" href="#instalar">Cómo instalar</a>
+        <a class="btn btn-ghost" href="/admin">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4.5 15.5v3A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5v-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+          Publicar
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span> Tienda de apps independiente</p>
+        <h1>Apps que merecen<br><span class="silver-text">estar en tu Android.</span></h1>
+        <p class="lead">
+          Descarga los APK directamente, sin cuentas ni anuncios. Cada versión se publica
+          con su tamaño y su huella SHA-256 para que sepas exactamente qué instalas.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#apps">
+            Explorar la tienda
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a class="btn btn-ghost" href="#instalar">Cómo instalar un APK</a>
+        </div>
+
+        <dl class="hero-stats" id="hero-stats">
+          <div><dt>Apps</dt><dd data-stat="apps">—</dd></div>
+          <div><dt>Descargas</dt><dd data-stat="downloads">—</dd></div>
+          <div><dt>Verificación</dt><dd>SHA-256</dd></div>
+        </dl>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-status"><span>9:41</span><span class="phone-dots"><i></i><i></i><i></i></span></div>
+            <div class="phone-head">
+              <span class="phone-title">The SilverShop</span>
+              <span class="phone-pill">3 apps</span>
+            </div>
+            <div class="phone-card">
+              <span class="phone-icon a"></span>
+              <span class="phone-lines"><i></i><i></i></span>
+            </div>
+            <div class="phone-card">
+              <span class="phone-icon b"></span>
+              <span class="phone-lines"><i></i><i></i></span>
+            </div>
+            <div class="phone-card">
+              <span class="phone-icon c"></span>
+              <span class="phone-lines"><i></i><i></i></span>
+            </div>
+            <div class="phone-cta"></div>
+          </div>
+        </div>
+        <div class="chip-float chip-a">
+          <span class="chip-dot"></span> APK verificado
+        </div>
+        <div class="chip-float chip-b">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 20h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Descarga directa
+        </div>
+        <div class="halo"></div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="apps">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Catálogo</p>
+          <h2>Todas las apps</h2>
+        </div>
+        <label class="sort">
+          <span>Ordenar por</span>
+          <select id="sort">
+            <option value="recent">Más recientes</option>
+            <option value="popular">Más descargadas</option>
+            <option value="name">Nombre (A–Z)</option>
+            <option value="oldest">Más antiguas</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="chips" id="categories" role="group" aria-label="Filtrar por categoría">
+        <button class="chip is-active" data-category="Todas" type="button">Todas</button>
+      </div>
+
+      <div class="grid" id="app-grid" aria-live="polite">
+        <div class="card skeleton"><div class="sk-icon"></div><div class="sk-line w70"></div><div class="sk-line w90"></div><div class="sk-line w40"></div></div>
+        <div class="card skeleton"><div class="sk-icon"></div><div class="sk-line w70"></div><div class="sk-line w90"></div><div class="sk-line w40"></div></div>
+        <div class="card skeleton"><div class="sk-icon"></div><div class="sk-line w70"></div><div class="sk-line w90"></div><div class="sk-line w40"></div></div>
+      </div>
+
+      <div class="empty" id="empty" hidden>
+        <span class="empty-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        <h3>Nada por aquí todavía</h3>
+        <p id="empty-text">Prueba con otra búsqueda o cambia de categoría.</p>
+        <button class="btn btn-ghost" id="clear-filters" type="button">Ver todas las apps</button>
+      </div>
+    </section>
+
+    <section class="wrap section" id="instalar">
+      <div class="install">
+        <div class="install-copy">
+          <p class="eyebrow">Instalación</p>
+          <h2>De la tienda a tu pantalla en 3 pasos</h2>
+          <p class="muted">Android protege tu teléfono: la primera vez te pedirá permiso para instalar apps desde el navegador. Solo se concede una vez.</p>
+        </div>
+        <ol class="steps">
+          <li>
+            <span class="step-number">1</span>
+            <div><h3>Descarga el APK</h3><p>Abre la ficha de la app y toca <strong>Descargar</strong>. Se guardará en la carpeta de descargas del teléfono.</p></div>
+          </li>
+          <li>
+            <span class="step-number">2</span>
+            <div><h3>Permite la instalación</h3><p>Al abrirlo, Android pedirá permitir «instalar apps desconocidas» para el navegador o el explorador de archivos.</p></div>
+          </li>
+          <li>
+            <span class="step-number">3</span>
+            <div><h3>Instala y abre</h3><p>Toca <strong>Instalar</strong>, espera unos segundos y abre la app. Las actualizaciones se instalan encima sin borrar tus datos.</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark small" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 2.5 29.5 16 16 29.5 2.5 16z" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M16 8.5 23.5 16 16 23.5 8.5 16z" fill="currentColor" opacity=".85"/>
+          </svg>
+        </span>
+        <div>
+          <p class="footer-name">The SilverShop</p>
+          <p class="muted small">Apps independientes, publicadas a mano.</p>
+        </div>
+      </div>
+      <nav class="footer-links">
+        <a href="#apps">Catálogo</a>
+        <a href="#instalar">Instalar APK</a>
+        <a href="/admin">Panel de publicación</a>
+      </nav>
+    </div>
+    <div class="wrap footer-note">
+      <p>Los APK se distribuyen fuera de Google Play. Instalar software de origen desconocido es responsabilidad de quien lo hace.</p>
+      <p>© <span id="year"></span> The SilverShop</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/store.js"></script>
+</body>
+</html>

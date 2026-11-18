@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!--SEO-->
+  <meta name="theme-color" content="#08090b">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <header class="topbar is-stuck">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/" aria-label="The SilverShop, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 2.5 29.5 16 16 29.5 2.5 16z" stroke="url(#silver)" stroke-width="1.6"/>
+            <path d="M16 8.5 23.5 16 16 23.5 8.5 16z" fill="url(#silver)" opacity=".9"/>
+            <defs>
+              <linearGradient id="silver" x1="6" y1="3" x2="26" y2="29" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#ffffff"/><stop offset=".5" stop-color="#c9d0db"/><stop offset="1" stop-color="#7f8896"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="brand-text">The <em>Silver</em>Shop</span>
+      </a>
+
+      <label class="search" for="q">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.7"/>
+          <path d="m16 16 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+        <input id="q" type="search" placeholder="Buscar en la tienda" autocomplete="off" spellcheck="false">
+        <kbd aria-hidden="true">/</kbd>
+      </label>
+
+      <nav class="top-actions">
+        <a class="btn btn-ghost hide-sm" href="/#instalar">Cómo instalar</a>
+        <a class="btn btn-ghost" href="/admin">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4.5 15.5v3A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5v-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+          Publicar
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap detail-wrap" id="app-root">
+    <div class="detail">
+      <div>
+        <div class="card skeleton" style="min-height:140px"></div>
+        <div class="card skeleton" style="min-height:260px;margin-top:22px"></div>
+      </div>
+      <div class="panel skeleton" style="min-height:300px"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark small" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 2.5 29.5 16 16 29.5 2.5 16z" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M16 8.5 23.5 16 16 23.5 8.5 16z" fill="currentColor" opacity=".85"/>
+          </svg>
+        </span>
+        <div>
+          <p class="footer-name">The SilverShop</p>
+          <p class="muted small">Apps independientes, publicadas a mano.</p>
+        </div>
+      </div>
+      <nav class="footer-links">
+        <a href="/#apps">Catálogo</a>
+        <a href="/#instalar">Instalar APK</a>
+        <a href="/admin">Panel de publicación</a>
+      </nav>
+    </div>
+    <div class="wrap footer-note">
+      <p>Los APK se distribuyen fuera de Google Play. Instalar software de origen desconocido es responsabilidad de quien lo hace.</p>
+      <p>© <span id="year"></span> The SilverShop</p>
+    </div>
+  </footer>
+
+  <dialog class="shot-dialog" id="shot-dialog">
+    <form method="dialog" style="margin:0">
+      <img id="shot-image" alt="Captura de la app">
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+node_modules
+data
+.env
+.git
+.gitignore
+*.log
+iniciar.ps1
+Iniciar The SilverShop.bat

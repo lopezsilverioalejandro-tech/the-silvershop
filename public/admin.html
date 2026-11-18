@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Panel — The SilverShop</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#08090b">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <header class="topbar is-stuck">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/" aria-label="The SilverShop, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 2.5 29.5 16 16 29.5 2.5 16z" stroke="url(#silver)" stroke-width="1.6"/>
+            <path d="M16 8.5 23.5 16 16 23.5 8.5 16z" fill="url(#silver)" opacity=".9"/>
+            <defs>
+              <linearGradient id="silver" x1="6" y1="3" x2="26" y2="29" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#ffffff"/><stop offset=".5" stop-color="#c9d0db"/><stop offset="1" stop-color="#7f8896"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="brand-text">The <em>Silver</em>Shop</span>
+        <span class="admin-pill">Panel</span>
+      </a>
+      <div class="top-actions">
+        <a class="btn btn-ghost store-link" href="/" target="_blank" rel="noopener">Ver la tienda</a>
+        <button class="btn btn-ghost" id="logout-btn" type="button" hidden>Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap admin">
+    <!-- ---------------------------- acceso ---------------------------- -->
+    <section id="login-view" class="auth" hidden>
+      <form class="auth-card panel" id="login-form">
+        <p class="eyebrow">Acceso privado</p>
+        <h1>Entrar en el panel</h1>
+        <p class="muted">Aquí se suben y editan las apps de la tienda. Solo con tu contraseña.</p>
+        <label class="field">
+          <span>Contraseña</span>
+          <input type="password" id="password" name="password" autocomplete="current-password" required autofocus>
+        </label>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="login-submit">Entrar</button>
+        <p class="form-error" id="login-error" hidden></p>
+      </form>
+      <p class="auth-note muted small">La contraseña se define en el archivo <code>.env</code> del servidor.</p>
+    </section>
+
+    <!-- ---------------------------- panel ----------------------------- -->
+    <section id="panel-view" hidden>
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Panel de publicación</p>
+          <h1>Tus apps</h1>
+        </div>
+        <button class="btn btn-primary" id="new-app-btn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+          </svg>
+          Nueva app
+        </button>
+      </div>
+
+      <div class="stats" id="admin-stats"></div>
+
+      <!-- editor -->
+      <form class="editor panel" id="app-form" hidden>
+        <div class="editor-head">
+          <div>
+            <h2 id="editor-title">Nueva app</h2>
+            <p class="muted small" id="editor-sub">Sube un APK y la tienda rellena lo que puede por ti.</p>
+          </div>
+          <button class="btn btn-ghost" type="button" id="close-editor">Cancelar</button>
+        </div>
+
+        <input type="hidden" id="app-id">
+        <input type="hidden" id="apk-token">
+
+        <div id="apk-box" class="apk-box">
+          <label class="dropzone" id="apk-drop" for="apk-file">
+            <input type="file" id="apk-file" accept=".apk,application/vnd.android.package-archive" hidden>
+            <span class="drop-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4.5 15.5v3A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5v-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="drop-title">Arrastra aquí el APK</span>
+            <span class="drop-sub">o toca para elegir el archivo · máximo 250 MB</span>
+          </label>
+
+          <div class="apk-info" id="apk-info" hidden>
+            <img id="apk-icon" alt="" class="apk-icon">
+            <div class="apk-info-text">
+              <strong id="apk-name">—</strong>
+              <span id="apk-meta" class="muted small">—</span>
+              <span id="apk-hash" class="mono small">—</span>
+            </div>
+            <button class="icon-btn" type="button" id="apk-clear" aria-label="Quitar APK">
+              <svg viewBox="0 0 24 24" fill="none"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>Nombre de la app</span>
+            <input type="text" id="f-name" maxlength="80" placeholder="Aula">
+          </label>
+          <label class="field">
+            <span>Categoría</span>
+            <select id="f-category"></select>
+          </label>
+          <label class="field span-2">
+            <span>Frase corta</span>
+            <input type="text" id="f-tagline" maxlength="160" placeholder="Organizador de materias y tareas, sin cuentas.">
+          </label>
+          <label class="field">
+            <span>Desarrollador</span>
+            <input type="text" id="f-publisher" maxlength="60" placeholder="The SilverShop">
+          </label>
+          <label class="field">
+            <span>Paquete</span>
+            <input type="text" id="f-package" maxlength="120" placeholder="com.ejemplo.app">
+          </label>
+          <label class="field create-only">
+            <span>Versión</span>
+            <input type="text" id="f-version" maxlength="40" placeholder="2.1.1 (se lee del APK)">
+          </label>
+          <label class="field create-only">
+            <span>Novedades de esta versión</span>
+            <input type="text" id="f-changelog" maxlength="300" placeholder="Qué cambia en esta versión.">
+          </label>
+          <label class="field span-2">
+            <span>Descripción</span>
+            <textarea id="f-description" rows="7" maxlength="8000" placeholder="Qué hace la app, qué incluye y por qué es distinta.&#10;&#10;- Un punto por línea&#10;- Otro punto"></textarea>
+          </label>
+        </div>
+
+        <div class="media-grid">
+          <label class="field">
+            <span>Icono (opcional)</span>
+            <input type="file" id="f-icon" accept="image/png,image/jpeg,image/webp,image/gif">
+            <small class="muted">Si no lo subes, se extrae del propio APK.</small>
+          </label>
+          <label class="field">
+            <span>Capturas (opcional)</span>
+            <input type="file" id="f-screenshots" accept="image/png,image/jpeg,image/webp,image/gif" multiple>
+            <small class="muted">Se añaden al final de las que ya haya.</small>
+          </label>
+        </div>
+
+        <div class="thumbs" id="thumbs"></div>
+
+        <div class="toggles">
+          <label class="toggle"><input type="checkbox" id="f-featured"> <span>Destacar en la tienda</span></label>
+          <label class="toggle"><input type="checkbox" id="f-published" checked> <span>Visible al público</span></label>
+        </div>
+
+        <div class="editor-actions">
+          <button class="btn btn-primary btn-lg" type="submit" id="save-btn">Guardar app</button>
+          <span class="muted small" id="save-hint">Se publicará al guardar.</span>
+        </div>
+
+        <!-- versiones (solo al editar) -->
+        <div class="versions-box" id="versions-box" hidden>
+          <div class="versions-head">
+            <h3>Versiones publicadas</h3>
+            <span class="muted small">La más reciente es la que se descarga por defecto.</span>
+          </div>
+          <div class="versions" id="admin-versions"></div>
+
+          <div class="new-version">
+            <h3>Añadir una versión</h3>
+            <div class="new-version-grid">
+              <label class="field">
+                <span>APK nuevo</span>
+                <input type="file" id="v-apk" accept=".apk">
+              </label>
+              <label class="field">
+                <span>Versión</span>
+                <input type="text" id="v-name" maxlength="40" placeholder="2.2.0">
+              </label>
+              <label class="field span-2">
+                <span>Novedades</span>
+                <textarea id="v-changelog" rows="3" maxlength="4000" placeholder="Qué cambia en esta versión."></textarea>
+              </label>
+            </div>
+            <button class="btn btn-ghost" type="button" id="add-version-btn">Subir versión</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="app-list" id="apps-list"></div>
+      <div class="empty" id="admin-empty" hidden>
+        <span class="empty-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </span>
+        <h3>Todavía no hay apps</h3>
+        <p>Sube tu primer APK y aparecerá en la tienda al instante.</p>
+        <button class="btn btn-primary" type="button" id="admin-empty-btn">Subir la primera</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/admin.js"></script>
+</body>
+</html>
