@@ -28,6 +28,21 @@ function loadEnv(file) {
 
 loadEnv(path.join(ROOT, '.env'));
 
+/** Codigo de verificacion de Google: variable de entorno o archivo del repo. */
+function googleVerification() {
+  if (process.env.GOOGLE_SITE_VERIFICATION) {
+    return process.env.GOOGLE_SITE_VERIFICATION.trim();
+  }
+  try {
+    const parsed = JSON.parse(
+      fs.readFileSync(path.join(ROOT, 'seo-verification.json'), 'utf8'),
+    );
+    return String(parsed.google || '').trim();
+  } catch {
+    return '';
+  }
+}
+
 const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(ROOT, 'data'));
 const APK_DIR = path.join(DATA_DIR, 'apks');
 const ICON_DIR = path.join(DATA_DIR, 'icons');
