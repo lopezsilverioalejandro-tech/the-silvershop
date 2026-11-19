@@ -1,7 +1,7 @@
 name: keep-alive
 
 # Render duerme los servicios gratuitos tras 15 minutos sin visitas y, al
-# despertar, pierde los archivos subidos. Un ping cada 10 minutos mantiene la
+# despertar, pierde los archivos subidos. Un ping cada 5 minutos mantiene la
 # instancia despierta dentro de las horas gratuitas de Render.
 on:
   schedule:
@@ -13,4 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping The SilverShop
-        run: curl -fsS --max-time 30 https://the-silvershop.onrender.com/api/stats > /dev/null
+        run: |
+          for attempt in 1 2 3; do
+            if curl -fsS --max-time 60 https://the-silvershop.onrender.com/api/stats > /dev/null; then
+              echo "The SilverShop responde (intento $attempt)."
+              exit 0
+            fi
+            echo "Sin respuesta (intento $attempt); reintentando..."
+            sleep 20
+          done
+          exit 1
