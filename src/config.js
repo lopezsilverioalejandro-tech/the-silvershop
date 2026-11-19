@@ -80,7 +80,7 @@ module.exports = {
   MAX_APK_MB: Number(process.env.MAX_APK_MB) || 250,
   MAX_IMAGE_MB: 8,
   PUBLIC_URL: (process.env.PUBLIC_URL || '').replace(/\/+$/, ''),
-  GOOGLE_SITE_VERIFICATION: (process.env.GOOGLE_SITE_VERIFICATION || '').trim(),
+  GOOGLE_SITE_VERIFICATION: googleVerification(),
   AAPT_PATH: process.env.AAPT_PATH || '',
   NODE_ENV: process.env.NODE_ENV || 'development',
 };
